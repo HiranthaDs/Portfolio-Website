@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hirantha Dias - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #0a192f;
+            --secondary-bg: #112240;
+            --accent: #64ffda;
+            --text-primary: #ccd6f6;
+            --text-secondary: #8892b0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        .custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            pointer-events: none;
+            transition: transform 0.3s, opacity 0.3s;
+            z-index: 999;
+        }
+
+        .cursor-trail {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            pointer-events: none;
+            transition: all 0.1s;
+        }
+
+        header {
+            background-color: var(--secondary-bg);
+            color: var(--accent);
+            text-align: center;
+            padding: 100px 0;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--accent), #4bffc9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .container {
+            padding: 100px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section {
+            margin-bottom: 100px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section h2 {
+            color: var(--accent);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 15px;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            justify-items: center;
+        }
+
+        .repo {
+            background: linear-gradient(145deg, #112240, #0d1a35);
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            max-width: 350px;
+            text-align: center;
+        }
+
+        .repo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(100, 255, 218, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .repo:hover::before {
+            left: 100%;
+        }
+
+        .repo:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(100, 255, 218, 0.1);
+        }
+
+        .repo h3 {
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .repo p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .repo a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .repo a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .repo a:hover::after {
+            width: 100%;
+        }
+
+        .cv-button-container {
+            text-align: left;
+            margin-top: 40px;
+        }
+
+        .cv-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--accent);
+            color: #313131;
+            font-size: 1.2rem;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .cv-button:hover {
+            background-color: #4bffc9;
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(100, 255, 218, 0.3);
+        }
+
+        .footer {
+            background-color: var(--secondary-bg);
+            color: var(--text-primary);
+            text-align: center;
+            padding: 40px 0;
+            font-size: 1.2rem;
+        }
+
+        .footer a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .section h2 {
+                font-size: 2rem;
+            }
+
+            .campus-projects .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="custom-cursor"></div>
+    <div class="cursor-trail"></div>
+
+    <header>
+        <h1>Hirantha Dias</h1>
+        <p>Full-Stack Developer & Software Engineer</p>
+    </header>
+
+    <div class="container">
+        <!-- About Me Section -->
+        <div class="section" id="about-me">
+            <h2>About Me</h2>
+            <p>
+                Hello, I'm Hirantha Dias, a passionate Full-Stack Developer and Software Engineer. With a strong foundation in both front-end and back-end development, I enjoy building efficient, scalable, and user-friendly applications. I have experience in various technologies such as Java, Node.js, Express.js, Python, and more. I thrive on challenges and am constantly seeking to learn and grow by exploring new technologies and tools.
+                <br><br>
+                My journey in software development started in my undergraduate years, and since then, I have developed a deep understanding of web and mobile development. I believe in writing clean, maintainable code and always strive to create solutions that are both functional and user-centric. When I'm not coding, you can find me experimenting with new ideas, solving algorithmic problems, or contributing to open-source projects.
+                <br><br>
+                As I continue to grow in my career, I am excited to work on meaningful projects that challenge my skills and allow me to make a positive impact through technology. I'm always open to collaborations and new opportunities that align with my passion for software development.
+            </p>
+
+            <!-- CV Button -->
+            <div class="cv-button-container">
+                <a href="file:///C:/Users/Hirantha%20Dias/Desktop/Git%20Work/Portfolio%20Website/A%20A%20H%20Dias%20CV-1.png" class="cv-button" target="_blank">View My CV</a>
+            </div>
+        </div>
+
+        <!-- GitHub Repositories Section -->
+        <div class="section" id="github-repos">
+            <h2>GitHub Projects</h2>
+            <div class="grid" id="repo-grid">
+                <!-- Repositories will be populated here -->
+            </div>
+        </div>
+
+        <!-- Campus Projects Section -->
+        <div class="section campus-projects" id="campus-projects">
+            <h2>Campus Projects</h2>
+            <div class="grid">
+                <div class="campus-project">
+                    <!-- <img src="path-to-your-image.jpg" alt="Project 1">-->
+                    <h3>Project 1</h3>
+                    <p>For a one-day entrepreneurial assignment at SLIIT City University, my team and I launched a food stall offering hot dogs, pasta, and mojitos. As Project Leader, Financial Analyst, and Operations Manager, I guided the project from concept to execution. I led market research, developed a diverse menu, and handled financial planning, creating a detailed budget. Our efforts resulted in a profit of LKR 15,000 within a day. I also managed procurement, vendor relationships, and marketing strategies, boosting visibility and customer engagement. This experience enhanced my financial, operational, and strategic planning skills in a fast-paced business environment..</p>
+                </div>
+                <div class="campus-project">
+                    <!-- <img src="path-to-your-image.jpg" alt="Project 2">-->
+                    <h3>Project 2</h3>
+                    <p>As part of our Computer Security module, my team and I conducted a comprehensive Security Vulnerability Assessment for Rohan Construction Firm in Kandana, Sri Lanka. In my roles as Team Lead, Risk Management Specialist, and Documentation Specialist, I oversaw the assessment and ensured effective communication within the team.
+
+                        We identified critical vulnerabilities, including risks of Injection Attacks, weak login controls, and social engineering threats. I led the analysis and proposed both short-term and long-term remediations. As Risk Management Specialist, I prioritized remediation efforts based on their impact. I also documented our findings, ensuring clear records for future reference. This project sharpened my leadership, risk assessment, and documentation skills..</p>
+                </div>
+                <div class="campus-project">
+                    <!-- <img src="path-to-your-image.jpg" alt="Project 3">-->
+                    <h3>Project 3</h3>
+                    <p>For our university project, my team and I developed a Streamlined Project Management System for Rohan Construction Firm in Kandana, Sri Lanka. As the Business Analyst, I gathered and analyzed requirements from stakeholders to ensure the system met their needs. I acted as a bridge between the development team and the firm, translating technical concepts into business terms.
+
+                        Using Python and Google Firebase, we created a secure and scalable system. I contributed to defining the project scope, creating user stories, and assisting with user acceptance testing. The system increased the firm's efficiency by 30%, and this project strengthened my skills in requirements analysis, stakeholder management, and project documentation..</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 Hirantha Dias. All rights reserved.</p>
+        <p>Follow me on <a href="https://github.com/HiranthaDs" target="_blank">GitHub</a> | <a href="https://www.linkedin.com/in/hirantha-dias-17108423a/" target="_blank">LinkedIn</a></p>
+    </div>
+
+    <script>
+        // Custom cursor logic
+        const cursor = document.querySelector('.custom-cursor');
+        const trail = document.querySelector('.cursor-trail');
+        let trailElements = [];
+
+        // Create trail elements
+        for (let i = 0; i < 5; i++) {
+            let trailClone = trail.cloneNode(true);
+            trailElements.push(trailClone);
+            document.body.appendChild(trailClone);
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = `${e.clientX}px`;
+            cursor.style.top = `${e.clientY}px`;
+            
+            trailElements.forEach((trail, index) => {
+                setTimeout(() => {
+                    trail.style.left = `${e.clientX}px`;
+                    trail.style.top = `${e.clientY}px`;
+                }, 100 * index);
+            });
+        });
+
+        // Fetch GitHub repositories and display them
+        fetch('https://api.github.com/users/HiranthaDs/repos')
+            .then(response => response.json())
+            .then(repositories => {
+                const repoGrid = document.getElementById('repo-grid');
+                repositories.forEach(repo => {
+                    const repoElement = document.createElement('div');
+                    repoElement.classList.add('repo');
+                    repoElement.innerHTML = `
+                        <h3>${repo.name}</h3>
+                        <p>${repo.description || 'No description available.'}</p>
+                        <a href="${repo.html_url}" target="_blank">Visit Repository</a>
+                    `;
+                    repoGrid.appendChild(repoElement);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching repositories:', error);
+            });
+
+        // Intersection Observer for reveal animations
+        const sections = document.querySelectorAll('.section');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.5 });
+
+        sections.forEach((section) => observer.observe(section));
+    </script>
+</body>
+</html>
